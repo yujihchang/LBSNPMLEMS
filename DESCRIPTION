@@ -1,0 +1,14 @@
+Package: SurrCase
+Title: Surrogate Case Analysis for Time-to-Event Data
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jih-Chjang", "Yu", , "jcyu@gm.ntpu.edu.tw", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package provides methods for surrogate case analysis 
+    in time-to-event data. It includes functions for estimation, 
+    inference, and visualization of surrogate relationships.
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.2
+LazyData: true
