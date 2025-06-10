@@ -16,6 +16,22 @@ This function implements the proposed estimation and variable selection procedur
 \emph{``Estimation and Variable Selection for Semiparametric Transformation Models with Length-Biased Survival Data''}.
 It is part of an R package developed to accompany the methodology described in the paper.
 }
+\Outputs{
+\item{npmle}{Nonparametric maximum likelihood estimator without variable selection.}
+\item{haz}{Estimated cumulative baseline hazard function.}
+\item{npmle.sd}{Estimated standard deviation of the nonparametric maximum likelihood estimator.}
+\item{lambda.aic}{Selected tuning parameter \code{lambda} based on AIC.}
+\item{lambda.bic}{Selected tuning parameter \code{lambda} based on BIC.}
+\item{AIC}{Akaike information criterion value.}
+\item{BIC}{Bayesian information criterion value.}
+\item{coef.aic}{Regression coefficient estimates selected based on AIC.}
+\item{coef.bic}{Regression coefficient estimates selected based on BIC.}
+\item{coef.aic.sd}{Estimated standard deviation of \code{coef.aic}.}
+\item{coef.bic.sd}{Estimated standard deviation of \code{coef.bic}.}
+\item{choose.X.aic}{Indices of covariates selected based on AIC.}
+\item{choose.X.bic}{Indices of covariates selected based on BIC.}
+}
+
 \examples{
 data(expdata)
 
