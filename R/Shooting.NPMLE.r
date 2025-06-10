@@ -882,7 +882,7 @@ lambdaK=lambda/abs(BB$coef)
 kk=0
 while(max(abs(BBnew-BBold))>10^-5&rstep<500){
 rstep=rstep+1
-print(rstep)
+
 BBold=BBnew
 for(k in 1:P){
 AL=sum((YL-XL[,-k]%*%BBnew[-k])*XL[,k])
