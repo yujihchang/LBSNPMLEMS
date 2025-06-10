@@ -863,11 +863,6 @@ return(rse)
 Shooting.NPMLE=function(A,Y,D,X,r,nlan){
 #r=0.4;nlan=100
 #setwd("/home/Yujihzhang/NPMLE package/npmle and aLasso")
-source("NPMLE.r")
-source("predict haz.r")
-source("AIC BIC.r")
-source("estR.r")
-source("tran.npmle.sd.r")
 
 BB=NPMLE(A,Y,D,as.matrix(X),r)
 #IF=(BB$IF2+t(BB$IF2))/2
