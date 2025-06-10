@@ -16,7 +16,7 @@ This function implements the proposed estimation and variable selection procedur
 \emph{``Estimation and Variable Selection for Semiparametric Transformation Models with Length-Biased Survival Data''}.
 It is part of an R package developed to accompany the methodology described in the paper.
 }
-\Outputs{
+\Vaues{
 \item{npmle}{Nonparametric maximum likelihood estimator without variable selection.}
 \item{haz}{Estimated cumulative baseline hazard function.}
 \item{npmle.sd}{Estimated standard deviation of the nonparametric maximum likelihood estimator.}
