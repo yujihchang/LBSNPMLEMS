@@ -2,7 +2,7 @@
 \alias{Shooting.NPMLE}
 \title{Estimation and Variable Selection for Semiparametric Transformation Models with Length-Biased Survival Data}
 \usage{
-Shooting.NPMLE(A, Y, D, X, r, p=10)
+Shooting.NPMLE(A, Y, D, X, r, nlan=10)
 }
 \arguments{
   \item{A}{Left truncation time.}
@@ -23,7 +23,7 @@ A <- data[, 1]
 Y <- data[, 2]
 D <- data[, 3]
 X <- data[, -c(1:3)]
-ans0 <- Shooting.NPMLE(A, Y, D, X, r = 0.4, p = 10)
+ans0 <- Shooting.NPMLE(A, Y, D, X, r = 0.4, nlan = 10)
 str(ans0)
 }
 \keywords{survival, semiparametric, transformation models, variable selection, length-biased}
