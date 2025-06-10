@@ -1056,4 +1056,3 @@ return(Ansi)
 
 #ans=Shooting.NPMLE(A,Y,D,X,1,100)
 
-
