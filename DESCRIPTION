@@ -1,14 +1,19 @@
-Package: SurrCase
-Title: Surrogate Case Analysis for Time-to-Event Data
-Version: 0.0.0.9000
+Package: LBSNPMLEMS
+Type: Package
+Title: Estimation and Variable Selection for Semiparametric Transformation Models with Length-Biased Survival Data
+Version: 0.1.0
 Authors@R: 
-    person("Jih-Chjang", "Yu", , "jcyu@gm.ntpu.edu.tw", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package provides methods for surrogate case analysis 
-    in time-to-event data. It includes functions for estimation, 
-    inference, and visualization of surrogate relationships.
-License: MIT
+    c(person(given = "Jih-Chang", family = "Yu", role = c("aut", "cre"),
+             email = "jcyu@mail.ntpu.edu.tw"),
+      person(given = "Yu-Jen", family = "Cheng", role = "aut"))
+Description: This package implements the proposed methods from the paper 
+    "Estimation and Variable Selection for Semiparametric Transformation Models with Length-Biased Survival Data" 
+    by Yu and Cheng. It provides a nonparametric maximum likelihood estimator (NPMLE) under a full-likelihood framework, 
+    and includes variable selection using an adaptive LASSO penalty for semiparametric transformation models with 
+    length-biased survival data.
+Depends: R (>= 4.0)
+Imports: survival, stats
+License: GPL-3
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
 LazyData: true
+RoxygenNote: 7.2.3
