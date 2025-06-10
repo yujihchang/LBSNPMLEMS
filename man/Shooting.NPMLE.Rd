@@ -19,11 +19,10 @@ It is part of an R package developed to accompany the methodology described in t
 \examples{
 data(expdata)
 
-A <- expdata[, 1]
-Y <- expdata[, 2]
-D <- expdata[, 3]
-X <- expdata[, -c(1:3)]
-X <- X[, 1:10]
+A <- data[, 1]
+Y <- data[, 2]
+D <- data[, 3]
+X <- data[, -c(1:3)]
 ans0 <- Shooting.NPMLE(A, Y, D, X, r = 0.4, p = 10)
 str(ans0)
 }
