@@ -16,21 +16,26 @@ This function implements the proposed estimation and variable selection procedur
 \emph{``Estimation and Variable Selection for Semiparametric Transformation Models with Length-Biased Survival Data''}.
 It is part of an R package developed to accompany the methodology described in the paper.
 }
-\Vaues{
-\item{npmle}{Nonparametric maximum likelihood estimator without variable selection.}
-\item{haz}{Estimated cumulative baseline hazard function.}
-\item{npmle.sd}{Estimated standard deviation of the nonparametric maximum likelihood estimator.}
-\item{lambda.aic}{Selected tuning parameter \code{lambda} based on AIC.}
-\item{lambda.bic}{Selected tuning parameter \code{lambda} based on BIC.}
-\item{AIC}{Akaike information criterion value.}
-\item{BIC}{Bayesian information criterion value.}
-\item{coef.aic}{Regression coefficient estimates selected based on AIC.}
-\item{coef.bic}{Regression coefficient estimates selected based on BIC.}
-\item{coef.aic.sd}{Estimated standard deviation of \code{coef.aic}.}
-\item{coef.bic.sd}{Estimated standard deviation of \code{coef.bic}.}
-\item{choose.X.aic}{Indices of covariates selected based on AIC.}
-\item{choose.X.bic}{Indices of covariates selected based on BIC.}
+\value{
+An object of class \code{"Shooting.NPMLE"} containing the following components:
+
+\itemize{
+  \item{\code{npmle}: }{Nonparametric maximum likelihood estimator without variable selection.}
+  \item{\code{haz}: }{Estimated cumulative baseline hazard function.}
+  \item{\code{npmle.sd}: }{Estimated standard deviation of \code{npmle}.}
+  \item{\code{lambda.aic}: }{Selected tuning parameter \code{lambda} based on AIC.}
+  \item{\code{lambda.bic}: }{Selected tuning parameter \code{lambda} based on BIC.}
+  \item{\code{AIC}: }{Akaike Information Criterion value.}
+  \item{\code{BIC}: }{Bayesian Information Criterion value.}
+  \item{\code{coef.aic}: }{Estimated regression coefficients selected by AIC.}
+  \item{\code{coef.bic}: }{Estimated regression coefficients selected by BIC.}
+  \item{\code{coef.aic.sd}: }{Standard deviation of \code{coef.aic}.}
+  \item{\code{coef.bic.sd}: }{Standard deviation of \code{coef.bic}.}
+  \item{\code{choose.X.aic}: }{Indices of covariates selected based on AIC.}
+  \item{\code{choose.X.bic}: }{Indices of covariates selected based on BIC.}
 }
+}
+
 
 \examples{
 data(expdata)
