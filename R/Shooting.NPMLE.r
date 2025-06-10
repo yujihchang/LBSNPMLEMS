@@ -1,7 +1,5 @@
 
 TTSMLike_beta=function(B,A,Y,D,X,r){
-
-
 n=length(Y)                  #sample size   
 Y=sort(Y,index.return=TRUE)
 D=D[Y$ix]
@@ -20,11 +18,8 @@ Yp=unique(Y[D==1])
 tiefun=function(cid){
 sum(Y[D==1]==cid)
 }
-
 nYjp=apply(matrix(Yp),1,tiefun)
-
 np=length(Yp)                    #number of failure
-
 ###########################  transformation function  ##################################
 #--------------------------------------------------------------------------------------- 
 # LA is cumulative based-line
@@ -44,13 +39,9 @@ dla=function(t){
 if(r==0){AA=0}
 if(r>0){AA=-r/(1+r*t)^2 }
 AA}
-
 kpa=function(t){dla(t)/la(t)}
-
-
 ###########################   estimating equation    ####################################
 Chen2009=function(B,X,r){
-
 BM=matrix(rep(B,each=n),n,p) # Bij=Bj for i=1~n  
 SBX=apply(X*BM,1,sum)        # SBXi  i=i~n  is sum^p_j X_ij * B_j                         
 R=rep(NA,np)
@@ -244,44 +235,33 @@ k=k+1
 #cat(k,BB,"\t",max(abs(CH$equ)),"\n")
 
                                         }
-
-
-
 ##############################################################################
 rse<-list(fal.time=Yp,tun.time=A,cen.index=D,coef=BB,base.haz=CH$R,k=k,equ=CH$equ)
 return(rse)
-
 }
-
+##########################################################################################
+##########################################################################################
+##########################################################################################
 
 #x is the timeing that you want to predit.
 #R is the estimated jump function of hazard function (breslow-type). 
-
 predit.haz=function(x,R,Y){
-
 Ys=unique(sort(Y))
-
 prefun=function(t){
 cid=sum(t>=Ys)
-
 if(cid<1) ans=0
 if(1<=cid& cid<length(Ys)) ans=R[cid]
 if(length(Ys)<=cid) ans=R[length(Ys)]
-
 ans
 }
-
 apply(matrix(x), 1 ,prefun)
-
 }
-
-
-
-
+##########################################################################################
+##########################################################################################
+##########################################################################################
 
 tran.npmle=function(A,Y,D,X,r){
 p=length(X)/length(Y)
-
 lc=which(D==1)
 Aa=c(A,(Y-A)[lc])
 if(p==1)Xa=c(X,X[lc]) else Xa=rbind(X,X[lc,])
@@ -294,29 +274,17 @@ if(p>1) {B=coxph(Surv(A[-DF],Y[-DF],D[-DF])~X[,-DF],method="breslow")$coef}
 if(p==1){B=coxph(Surv(A[-DF],Y[-DF],D[-DF])~X[-DF],method="breslow")$coef }
           }
 if(LDF==0){ B=coxph(Surv(A,Y,D)~X,method="breslow")$coef}  
-
-
-                                                 
 int.ans=TTSMLike_beta(B,Aa,Ya,Da,Xa,r)          
 #cat(r,"ok")
 n=length(Y)                                      
-
 R=predit.haz(sort(unique(Y)),int.ans$b,Y[D==1])+cumsum(runif(length(unique(Y)),0,10^-10))
-#R= (1:length(unique(Y)))/length(unique(Y))
-                                                   
 B=c(int.ans$coef)                                   
-
-                                  
 Y=sort(Y,index.return=TRUE)
 D=D[Y$ix]
-                                                 
-                                 #covariate matrix Xij_n*p ; n=sample size 
 if(p==1){X=matrix(X[Y$ix],n,p)}                    
 if(p>1){ X=matrix(X[Y$ix,],n,p)}
 Y=Y$x
-
 #--------------------------------------------------------------------------------------
-
 Yp=unique(Y)
 tiefun_1=function(cid){
 sum(Y[D==1]==cid)
@@ -324,17 +292,10 @@ sum(Y[D==1]==cid)
 tiefun_2=function(cid){
 sum(Y==cid)
 }
-
 nYjp=apply(matrix(Yp),1,tiefun_1)                 
 Y.times=apply(matrix(Yp),1,tiefun_2)             
 lc.jump=which(diff(c(0,Y))!=0)                   
-
-
-
 np=length(Yp)                                    
-#R=R+(1:np)/(np) #R=R[lc.jump]
-#R=(1:np)/(np) #R=R[lc.jump] 
-
 ###########################  transformation function  ##################################
 #--------------------------------------------------------------------------------------- 
 # LA is cumulative based-line
@@ -359,7 +320,6 @@ kpa=function(t){dg(t)/g(t)}
 #############################################################################
 # eat R
 #############################################################################
-
 estR=function(B,R){
 
 dRk=diff(c(0,R))
@@ -385,11 +345,7 @@ up=(nYjp+dRk*muZk)
 Rtise=rep(as.numeric(R),times=Y.times)
 down=( cumsum((eBX*(g(Rtise*eBX)-kpa(Rtise*eBX)*D))[n:1])[n:1] )[lc.jump]
 cumsum(up/down ) 
-
-
 }
-
-
 estB=function(B,R){
 
 Rtise=rep(R,times=Y.times)
@@ -421,11 +377,9 @@ equ[h]=sum(partall*Zi)
 }
 equ
 }
-
 #############################################################################
 #J-matrix
 ##############################################################################
-
 newton=function(B,R){
 JM=matrix(NA,p,p)
 eva=1/n
@@ -442,13 +396,10 @@ return(rse)
 }
 ###############################################################################
 R0=0
-#reptime=0
 RRR=0
 while(abs(sum(R0)-sum(R))>10^-3&RRR<50){
 R0=R
 R=estR(B,R0)
-#reptime=reptime+1
-#print(reptime)
 RRR=RRR+1
 }
 goal=estB(B,R)
@@ -484,12 +435,7 @@ while(abs(sum(R0)-sum(R))>10^-3&RRR<10){
 R0=R
 R=estR(BBnew,R0)
 RRR=RRR+1
-#cat(RRR)
 }
-
-
-
-
 
 goal=estB(BBnew,R)
 cat(BBnew," ",goal,kk,"\n")
@@ -500,12 +446,11 @@ kk=kk+1
 if(kk<600){
 rse<-list(coef=BBnew,bas.haz=R,iter=kk)
 return(rse)}
-
 if(kk==600) cat("divergece","\n") 
-
 }
-
-###################################################################################
+##########################################################################################
+##########################################################################################
+##########################################################################################
 
 AIC.BIC=function(A,Y,D,X,r,B,R0){
 p=NCOL(X)
@@ -538,8 +483,6 @@ sum(Y==cid)
 nYjp=apply(matrix(Yp),1,tiefun_1)                  # 計算每個 failure 時間點 jump 的個數
 Y.times=apply(matrix(Yp),1,tiefun_2)               # 計算每個時間點 jump 的個數  
 lc.jump=which(diff(c(0,Y))!=0)                     # 排序後的 Y 在向量中哪個位置發勝 jump.
-
-
 
 np=length(Yp)                                      #number of distinct obs's.
 
@@ -630,8 +573,10 @@ ans=list(AIC=AIC,BIC=BIC,Rout=R,like=likeBR,df=k)
 return(ans)
 
 }
-
+##########################################################################################
+##########################################################################################
 ###################################################################################
+
 asyvar=function(B,R,Y,D,X,r){
 
 B=c(B)
@@ -646,7 +591,6 @@ X=matrix(X,n,p)              #covariate matrix Xij_n*p ; n=sample size
 
 if(p>1){X=matrix(X[Y$ix,],n,p)}
 if(p==1){X=matrix(X[Y$ix],n,p)}
-
 
 Y=Y$x
 
@@ -664,8 +608,6 @@ sum(Y==cid)
 nYjp=apply(matrix(Yp),1,tiefun_1)
 Y.times=apply(matrix(Yp),1,tiefun_2)
 lc.jump=which(diff(c(0,Y))!=0)
-
-
 
 np=length(Yp)                    #number of distinct obs's.
 #R=(1:np)/np #R=R[lc.jump]
@@ -690,18 +632,15 @@ if(r>0){AA=-r/(1+r*t)^2 }
 AA}
 
 kpa=function(t){dg(t)/g(t)}
-#############################################################################
-# eat R
-#############################################################################
 
+#############################################################################
+# eat R                                                                     #
+#############################################################################
 
 estR=function(B,R){
-
 dRk=diff(c(0,R))
-
 if(p==1){BX=X*c(B)}
 if(p>1){BX=apply(matrix(t(t(X)*B),n,p),1,sum)}
-
 eBX=exp(BX)
 BXM=matrix(BX,n,np)
 eBXM=exp(BXM)
@@ -716,23 +655,17 @@ dtM.k=matrix(c(diff(Yp),0) ,n,np,byrow=TRUE)
 Szgz=(exp(-G(RM*eBXM))*g(RM*eBXM)*eBXM*dtM.k)
 muZk.1=t(apply(Szgz[,np:1],1,cumsum))[,np:1]
 muZk=apply(muZk.1/muZM,2,sum)
-
 up=(nYjp+dRk*muZk)
-
 Rtise=rep(R,times=Y.times)
-
 down=( cumsum((eBX*(g(Rtise*eBX)-kpa(Rtise*eBX)*D))[n:1])[n:1] )[lc.jump]
-
 cumsum(up/down ) 
-
 }
-
+##########################################################################################
+##########################################################################################
+##########################################################################################
 
 estB=function(B,R){
-
 Rtise=rep(R,times=Y.times)
-
-
 if(p==1){BX=X*c(B)}
 if(p>1){BX=apply(matrix(t(t(X)*B),n,p),1,sum)}
 eBX=exp(BX)
@@ -913,12 +846,6 @@ R
 ###################################################################################
 
 
-
-
-
-source("tran.npmle.r")
-source("tran.npmle.sd.r")
-
 NPMLE=function(A,Y,D,X,r){
 ans=tran.npmle(A,Y,D,X,r)
 B=ans$coef
@@ -930,10 +857,6 @@ SD=asyvar(B,Rb,Y,D,X,r)
 rse<-list(iter=iter,bas.haz=R,coef=B,sd=SD$sd,IF=SD$IF,sd2=SD$sd2,IF2=SD$IF2)
 return(rse)
 }
-
-
-
-
 
 
 
